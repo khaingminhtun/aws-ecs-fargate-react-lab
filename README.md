@@ -8,7 +8,7 @@ The React app is built into static assets, served by Nginx inside a Docker conta
 
 ## Architecture
 ![AWS Architecture](./frontend/asset/aws-ecs-fargate.jpg)
-```
+
 
 ## Deployment Flow
 1. Vite builds the React application into static assets.
