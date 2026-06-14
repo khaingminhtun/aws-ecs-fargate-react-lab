@@ -10,13 +10,16 @@ The React app is built into static assets, served by Nginx inside a Docker conta
 ![AWS Architecture](./frontend/asset/aws-ecs-fargate.jpg)
 ```
 
-**Deployment flow**
-
-1. Vite builds the React app into static files.
-2. A multi-stage Docker image (Node 22 build + Nginx serve) is created.
-3. The image is pushed to ECR via a bash script.
-4. AWS CDK provisions VPC, ECS cluster, Fargate service, and ALB.
-5. The ALB forwards traffic to the container on port **8080**.
+## Deployment Flow
+1. Vite builds the React application into static assets.
+2. A multi-stage Docker image (Node 22 build stage + Nginx runtime) is created.
+3. The image is pushed to Amazon ECR using an idempotent Bash script.
+4. AWS CDK provisions the infrastructure:
+      .VPC (2 Availability Zones)
+      .ECS Cluster
+      .Fargate Service
+      .Application Load Balancer (ALB)
+5.The ALB routes traffic to the ECS service on port 8080.
 
 ---
 
@@ -36,7 +39,7 @@ The React app is built into static assets, served by Nginx inside a Docker conta
 
 ## Folder Structure
 
-```
+```bash
 .
 ├── frontend/                  # React SPA source and Dockerfile
 │   ├── src/
